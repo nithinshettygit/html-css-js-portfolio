@@ -4,12 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
+    <title>Nithin Shetty M - My Portfolio</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
   </head>
   <body>
-    <!-- NAVIGATION -->
     <nav id="desktop-nav">
       <div class="logo">Nithin Shetty M</div>
       <ul class="nav-links">
@@ -19,6 +17,7 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+
     <nav id="hamburger-nav">
       <div class="logo">Nithin Shetty M</div>
       <div class="hamburger-menu">
@@ -34,17 +33,16 @@
       </div>
     </nav>
 
-    <!-- PROFILE SECTION -->
     <section id="profile">
       <div class="section__pic-container">
-        <img src="./assets/dp2.png" alt="Profile picture" />
+        <img src="./assets/dp2.png" alt="Nithin Shetty M profile picture" />
       </div>
       <div class="section__text">
         <p class="section__text__p1">Hello, I'm</p>
         <h1 class="title">Nithin Shetty M</h1>
-        <p class="section__text__p2">Student @ VCET Puttur</p>
+        <p class="section__text__p2">AI/ML Engineering Student @ VCET Puttur</p>
         <div class="btn-container">
-          <button class="btn btn-color-2" onclick="alert('Cannot download CV at the moment.')">
+          <button class="btn btn-color-2" onclick="alert('CV download coming soon!')">
             Download CV
           </button>
           <button class="btn btn-color-1" onclick="location.href='#contact'">
@@ -54,36 +52,34 @@
         <div id="socials-container">
           <img
             src="./assets/linkedin.png"
-            alt="LinkedIn"
+            alt="LinkedIn profile"
             class="icon"
-            onclick="location.href='https://www.linkedin.com/in/nithin-shetty-530274265/'"
+            onclick="window.open('https://www.linkedin.com/in/nithin-shetty-m-530274265/', '_blank')"
           />
           <img
             src="./assets/github.png"
-            alt="GitHub"
+            alt="GitHub profile"
             class="icon"
-            onclick="location.href='https://github.com/nithinshettygit'"
+            onclick="window.open('https://github.com/nithinshettygit', '_blank')"
           />
         </div>
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
     <section id="about">
       <p class="section__text__p1">Get To Know More</p>
       <h1 class="title">About Me</h1>
       <div class="experience-details1-container">
         <div class="section-container">
           <div class="section__pic-container">
-            <img src="./assets/dp3.jpg" alt="Profile picture" class="about-pic" />
+            <img src="./assets/dp3.jpg" alt="About section picture" class="about-pic" />
           </div>
           <div class="about-details-container">
             <div class="about-containers">
               <div class="details-container">
                 <img src="./assets/experience.png" alt="Experience icon" class="icon" />
                 <h3>Experience</h3>
-                <p>Student<br />III year</p>
-              </div>
+                <p>Student<br />Final Year AIML</p> </div>
               <div class="details-container">
                 <img src="./assets/education.png" alt="Education icon" class="icon" />
                 <h3>Education</h3>
@@ -100,7 +96,7 @@
                   src="./assets/location.jpg"
                   alt="Location icon"
                   class="icon"
-                  onclick="location.href='https://goo.gl/maps/your-map-shortlink'"
+                  onclick="window.open('https://maps.app.goo.gl/YourActualGoogleMapsLink', '_blank')"
                 />
               </p>
             </div>
@@ -115,13 +111,10 @@
       />
     </section>
 
-    <!-- SKILLS SECTION -->
     <section id="experience">
       <p class="section__text__p1">Explore My</p>
       <h1 class="title">Skills & Expertise</h1>
       <div class="experience-details-container">
-
-        <!-- Technical Skills (grid, 2 per row) -->
         <div class="details-container">
           <h2 class="experience-sub-title">Technical Skills</h2>
           <div class="skills-grid">
@@ -139,11 +132,11 @@
             </div>
             <div class="skill-item">
               <h3>PyTorch</h3>
-              <p>Hands‑on</p>
+              <p>Hands-on</p>
             </div>
             <div class="skill-item">
-              <h3>scikit‑learn</h3>
-              <p>Hands‑on</p>
+              <h3>scikit-learn</h3>
+              <p>Hands-on</p>
             </div>
             <div class="skill-item">
               <h3>OpenCV</h3>
@@ -151,16 +144,24 @@
             </div>
             <div class="skill-item">
               <h3>LangChain</h3>
-              <p>Hands‑on</p>
+              <p>Hands-on</p>
             </div>
             <div class="skill-item">
               <h3>OpenAI API</h3>
-              <p>Hands‑on</p>
+              <p>Hands-on</p>
             </div>
+            <div class="skill-item">
+              <h3>FAISS</h3>
+              <p>Hands-on</p> </div>
+            <div class="skill-item">
+              <h3>RAG</h3>
+              <p>Hands-on</p> </div>
+            <div class="skill-item">
+              <h3>Streamlit</h3>
+              <p>Hands-on</p> </div>
           </div>
         </div>
 
-        <!-- Soft Skills (below technical) -->
         <div class="details-container">
           <h2 class="experience-sub-title">Soft Skills</h2>
           <div class="skills-grid soft-skills">
@@ -175,7 +176,6 @@
             </div>
           </div>
         </div>
-
       </div>
       <img
         src="./assets/arrow.png"
@@ -185,14 +185,11 @@
       />
     </section>
 
-    <!-- PROJECTS SECTION -->
     <section id="projects">
       <p class="section__text__p1">Browse My Recent</p>
       <h1 class="title">Projects</h1>
       <div class="experience-details-container">
         <div class="about-containers">
-
-          <!-- Project 1: AIRA Teaching Bot -->
           <div class="details-container color-container">
             <div class="article-container">
               <img
@@ -205,16 +202,15 @@
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/nithinshettygit/Future-Classroom-AI-Powered-smart-Teaching-Robot'"
+                onclick="window.open('https://github.com/nithinshettygit/Future-Classroom-AI-Powered-smart-Teaching-Robot', '_blank')"
               >GitHub</button>
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://www.notion.so/AIRA-Teaching-Bot-218fe523d0b48008a35afd0d1861b979'"
+                onclick="window.open('https://www.notion.so/AIRA-Teaching-Bot-218fe523d0b48008a35afd0d1861b979', '_blank')"
               >Blog</button>
             </div>
           </div>
 
-          <!-- Project 2: Autonomous Wheelchair -->
           <div class="details-container color-container">
             <div class="article-container">
               <img
@@ -227,16 +223,15 @@
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/nithinshettygit/autonomous-wheelchair-project'"
+                onclick="window.open('https://github.com/nithinshettygit/autonomous-wheelchair-project', '_blank')"
               >GitHub</button>
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://www.notion.so/Autonomous-Wheelchair-Using-Deep-Learning-217fe523d0b480d5b960fa2e51e2910e'"
+                onclick="window.open('https://www.notion.so/Autonomous-Wheelchair-Using-Deep-Learning-217fe523d0b480d5b960fa2e51e2910e', '_blank')"
               >Blog</button>
             </div>
           </div>
 
-          <!-- Project 3: Hand Gesture Controlled Wheelchair -->
           <div class="details-container color-container">
             <div class="article-container">
               <img
@@ -249,16 +244,14 @@
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/nithinshettygit/handgesture-wheelchair'"
+                onclick="window.open('https://github.com/nithinshettygit/handgesture-wheelchair', '_blank')"
               >GitHub</button>
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >Live Demo</button>
+                onclick="window.open('https://github.com/', '_blank')" >Live Demo</button>
             </div>
           </div>
 
-          <!-- Project 4: Personal Portfolio -->
           <div class="details-container color-container">
             <div class="article-container">
               <img
@@ -271,15 +264,13 @@
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/nithinshettygit'"
+                onclick="window.open('https://github.com/nithinshettygit', '_blank')"
               >GitHub</button>
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/nithinshettygit'"
-              >Live Demo</button>
+                onclick="window.open('https://github.com/nithinshettygit', '_blank')" >Live Demo</button>
             </div>
           </div>
-
         </div>
       </div>
       <img
@@ -290,7 +281,6 @@
       />
     </section>
 
-    <!-- CONTACT SECTION -->
     <section id="contact">
       <p class="section__text__p1">Get in Touch</p>
       <h1 class="title">Contact Me</h1>
@@ -310,7 +300,7 @@
             class="icon contact-icon"
           />
           <p>
-            <a onclick="location.href='https://www.linkedin.com/in/nithin-shetty-530274265/'">
+            <a onclick="window.open('https://www.linkedin.com/in/nithin-shetty-m-530274265/', '_blank')">
               LinkedIn
             </a>
           </p>
@@ -318,7 +308,6 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
@@ -326,9 +315,26 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <p>&copy; 2024 Nithin Shetty M. All Rights Reserved.</p>
+      <p>© 2024 Nithin Shetty M. All Rights Reserved.</p>
     </footer>
 
+    <button id="chatbot-toggle-button" onclick="toggleChatbot()">
+      <img src="./assets/botgif.gif" alt="Animated Chatbot Icon" class="chatbot-icon-gif" />
+    </button>
+    <div id="chatbot-container">
+        <div id="chatbot-header">
+            <span>Nithin's AI Assistant</span>
+            <button id="chatbot-close-button" onclick="toggleChatbot()">✖</button>
+        </div>
+        <iframe id="chatbot-iframe" src="https://chat-bot-app-xxx.streamlit.app/?embedded=true" title="Nithin Shetty M's AI Portfolio Assistant"></iframe>
+    </div>
+
     <script src="script.js"></script>
+    <script>
+        function toggleChatbot() {
+            const chatbotContainer = document.getElementById('chatbot-container');
+            chatbotContainer.classList.toggle('open');
+        }
+    </script>
   </body>
 </html>
