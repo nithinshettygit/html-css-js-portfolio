@@ -701,7 +701,7 @@ footer .nav-links a:hover {
     left: 30px; /* Position on the left side */
     top: 58%; /* UPDATED: Changed from 50% to 58% to move it slightly down */
     transform: translateY(-50%); /* Adjust for true vertical centering */
-    background-color: #007bff;
+    background-color: #0400ff;
     color: white;
     border: none;
     border-radius: 50%;
@@ -1018,7 +1018,7 @@ footer .nav-links a:hover {
     }
 
     .chatbot-icon-gif {
-        width: 70px; /* Scale down GIF for mobile button */
-        height: 70px;
+        width: 120px; /* Scale down GIF for mobile button */
+        height: 120px;
     }
 }
