@@ -671,8 +671,8 @@ footer .nav-links a:hover {
 
 /* Style the GIF inside the button - MADE ROUND */
 .chatbot-icon-gif {
-    width: 148px; /* User-requested size */
-    height: 148px; /* User-requested size */
+    width: 130px; /* User-requested size */
+    height: 130px; /* User-requested size */
     object-fit: contain; /* Ensures the GIF scales within its bounds without cropping */
     border-radius: 50%; /* Make the GIF itself appear round */
 }
@@ -680,7 +680,7 @@ footer .nav-links a:hover {
 #chatbot-header {
     background-color: #007bff;
     color: white;
-    padding: 52px 21px;
+    padding: 12px 18px;
     font-size: 1.3em;
     font-weight: 600;
     border-top-left-radius: 12px;
@@ -693,7 +693,7 @@ footer .nav-links a:hover {
 #chatbot-close-button {
     background: none;
     border: none;
-    color: lightsalmon;
+    color: white;
     font-size: 1.6em;
     cursor: pointer;
     padding: 0 5px;
@@ -983,25 +983,27 @@ footer .nav-links a:hover {
     }
 
     /* Chatbot container for smaller screens */
-    #chatbot-container.open {
-        /* Mobile opened state: Take up most of the screen but leave padding */
-        top: 50px; /* Even more space from the top */
-        right: 30px; /* Slightly more space from the right */
-        bottom: 100px; /* Even more space from the bottom (above the button) */
-        left: 30px; /* Slightly more space from the left */
-        width: calc(100vw - 60px); /* Adjust width to match new left/right padding */
-        height: calc(100vh - 150px); /* Adjust height to match new top/bottom padding */
-        transform: none; /* Ensure no conflicting transforms are applied */
-    }
+    @media screen and (max-width: 768px) {
+        #chatbot-container.open {
+            /* Mobile opened state: Increased space from bottom to clear input area */
+            top: 50px; 
+            right: 30px; 
+            bottom: 130px; /* INCREASED from 100px */
+            left: 30px; 
+            width: calc(100vw - 60px); 
+            height: calc(100vh - 180px); /* Adjusted height (50px top + 130px bottom) */
+            transform: none; 
+        }
 
-    #chatbot-toggle-button {
-        width: 80px; /* A more reasonable size for mobile, to contain scaled GIF */
-        height: 80px;
-        bottom: 20px;
-        right: 20px;
-    }
-    .chatbot-icon-gif {
-        width: 89px; /* Scale down GIF for mobile button */
-        height: 89px;
+        #chatbot-toggle-button {
+            width: 80px; 
+            height: 80px;
+            bottom: 20px;
+            right: 20px;
+        }
+        .chatbot-icon-gif {
+            width: 70px;
+            height: 70px;
+        }
     }
 }
