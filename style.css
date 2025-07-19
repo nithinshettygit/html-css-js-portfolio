@@ -14,6 +14,7 @@ body {
     line-height: 1.6; /* Improved readability */
     color: #333; /* Darker text for better contrast */
     background-color: #f8f8f8; /* Light background for the whole page */
+    overflow-x: hidden; /* Prevent horizontal scrolling on smaller screens */
 }
 
 /* Smooth scrolling for anchor links */
@@ -354,12 +355,13 @@ section {
     max-width: 700px; /* Limit text width */
     margin: 2rem auto 0; /* Center text container */
     padding: 0 1rem; /* Add horizontal padding */
-    text-align: justify; /* Justify text for better appearance */
+    text-align: justify; /* Justify text for better appearance on desktop */
 }
 .text-container p:first-child { /* First paragraph in text container */
     margin-bottom: 1rem;
 }
-.text-container p:last-child { /* Second paragraph, containing location */
+/* This class helps center the "VCET Puttur" line and image */
+.text-container .vcet-info { 
     display: flex; /* Allow content to align */
     align-items: center;
     justify-content: center; /* Center content within the paragraph */
@@ -367,7 +369,7 @@ section {
     font-weight: 600; /* Bolder font */
     font-size: 1.1em; /* Slightly larger */
 }
-.text-container p:last-child .icon {
+.text-container .vcet-info .icon {
     height: 1.5rem; /* Smaller icon for inline usage */
     margin-left: 0.5rem;
     vertical-align: middle;
@@ -609,65 +611,77 @@ footer .nav-links a:hover {
 /* --- FLOATING CHATBOT STYLES --- */
 #chatbot-container {
     position: fixed;
-    right: 30px; /* Adjusted from 20px to give more space from edge */
-    width: 400px; /* Increased from 350px */
-    height: 600px; /* Increased from 500px */
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     z-index: 999; /* Below the button but above other content */
 
-    /* Initially hidden and off-screen */
-    transform: translateX(100%) scale(0.8);
+    /* Initial (closed) state: off-screen and invisible */
+    right: 30px;
+    bottom: 90px;
+    width: 400px; /* Default desktop width */
+    height: 600px; /* Default desktop height */
+    transform: translateX(100%) scale(0.8); /* Start off-screen */
     opacity: 0;
     visibility: hidden;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
 }
 
 #chatbot-container.open {
-    transform: translateX(0) scale(1); /* Slide in and scale up */
+    /* Opened state: visible and on-screen with desired spacing */
+    transform: translateX(0) scale(1); /* Ensure it opens fully scaled */
     opacity: 1;
     visibility: visible;
-    bottom: 90px; /* Adjusted from 80px to clear the larger button better */
+
+    /* Adjust positioning to leave more space from edges on desktop */
+    top: 40px; /* More space from the top edge */
+    right: 40px; /* More space from the right edge */
+    bottom: 110px; /* More space from the bottom (above the toggle button) */
+    left: auto; /* Calculate left automatically based on width and right */
+
+    /* Ensure responsiveness on larger screens while maintaining smaller max size */
+    width: min(320px, calc(100vw - 80px)); /* Max 320px, but 40px padding on each side */
+    height: min(480px, calc(100vh - 150px)); /* Max 480px, but 40px top + 110px bottom */
 }
 
 #chatbot-toggle-button {
     position: fixed;
-    bottom: 30px; /* Adjusted from 20px to give more space from edge */
-    right: 30px; /* Adjusted from 20px to give more space from edge */
-    background-color: #007bff; /* Blue button */
+    bottom: 30px;
+    right: 30px;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 50%; /* Make it perfectly round */
-    width: 65px; /* Increased from 50px */
-    height: 65px; /* Increased from 50px */
+    border-radius: 50%;
+    width: 140px; /* Increased to accommodate 130px GIF + 5px padding on each side */
+    height: 140px; /* Increased */
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-    z-index: 1000; /* Ensure it's above other content */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
     transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 #chatbot-toggle-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
 
-/* Style the GIF inside the button */
+/* Style the GIF inside the button - MADE ROUND */
 .chatbot-icon-gif {
-    width: 40px; /* Increased from 25px */
-    height: 40px; /* Increased from 25px */
+    width: 148px; /* User-requested size */
+    height: 148px; /* User-requested size */
     object-fit: contain; /* Ensures the GIF scales within its bounds without cropping */
+    border-radius: 50%; /* Make the GIF itself appear round */
 }
 
 #chatbot-header {
     background-color: #007bff;
     color: white;
-    padding: 12px 18px; /* Slightly more padding */
-    font-size: 1.3em; /* Slightly larger text in header */
+    padding: 52px 21px;
+    font-size: 1.3em;
     font-weight: 600;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -679,8 +693,8 @@ footer .nav-links a:hover {
 #chatbot-close-button {
     background: none;
     border: none;
-    color: white;
-    font-size: 1.6em; /* Slightly larger close button */
+    color: lightsalmon;
+    font-size: 1.6em;
     cursor: pointer;
     padding: 0 5px;
     transition: transform 0.2s ease;
@@ -729,7 +743,7 @@ footer .nav-links a:hover {
     .about-pic {
         width: 250px;
     }
-    .text-container p:last-child {
+    .text-container .vcet-info { /* Ensure this remains centered */
         font-size: 1.05em;
     }
 
@@ -756,124 +770,198 @@ footer .nav-links a:hover {
         width: 100%; /* Full width */
         position: sticky;
         top: 0;
-        background-color: #ffffff;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         z-index: 1000;
     }
-    .logo {
-        font-size: 1.8rem;
-    }
 
-    /* Adjust section padding and margins for smaller screens */
+    /* General section adjustments for smaller screens */
     section {
+        margin: 0 1rem; /* Smaller margins for very small screens */
         padding: 6vh 0;
-        margin: 0 1rem; /* Smaller horizontal margin */
-        min-height: auto; /* Allow sections to take natural height */
+        min-height: auto; /* Allow sections to shrink based on content */
     }
 
-    /* Profile section - stack elements vertically */
+    /* Profile Section - Mobile View Adjustments */
     #profile {
-        flex-direction: column;
+        flex-direction: column; /* Stack image and text vertically */
         gap: 2rem;
-        height: auto; /* Allow height to adjust */
-        padding-top: 10vh; /* More padding at top */
+        text-align: center; /* Ensure text is centered */
+        padding-top: 2rem; /* Reduce top padding for better fit */
     }
+
     .section__pic-container {
-        width: 250px;
+        width: 250px; /* Smaller image on mobile */
         height: 250px;
+        margin: 0 auto; /* Center the image container */
     }
+
     .section__text {
-        order: 1; /* Ensure text comes before image on mobile */
+        max-width: 90%; /* Allow text to take more width on small screens */
+        width: 100%;
+        margin: 0 auto; /* Center the text container */
     }
-    .section__pic-container {
-        order: 2; /* Image after text on mobile */
+
+    .section__text__p1 {
+        font-size: 1rem;
     }
+
     .title {
-        font-size: 2.5rem;
-    }
-    .section__text__p2 {
-        font-size: 1.2rem;
-    }
-    .btn-container {
-        flex-direction: column; /* Stack buttons vertically */
-        gap: 0.8rem;
-    }
-    .btn {
-        width: 100%; /* Full width buttons */
-        max-width: 200px; /* Max width for buttons */
-    }
-
-    /* About section - stack everything vertically */
-    #about .section-container {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    .about-containers {
-        flex-direction: column;
-        margin-left: 0; /* Remove hardcoded margin */
-        gap: 1rem;
-    }
-    .about-pic {
-        width: 200px;
-        margin: 0 auto;
-    }
-    .details-container {
-        min-width: unset; /* Remove min-width constraint */
-        width: 90%; /* Take up more width */
-        margin: 0 auto;
-    }
-    .text-container {
-        text-align: left; /* Adjust text alignment for mobile */
-        padding: 0 0.5rem;
-    }
-    .text-container p:last-child {
-        font-size: 1em;
-        justify-content: flex-start; /* Align location to start */
-    }
-    .arrow {
-        right: 1rem;
-        bottom: 0.5rem;
-        transform: none; /* Remove centering transform */
-    }
-
-    /* Skills section adjustments */
-    .skills-grid {
-        grid-template-columns: 1fr; /* Single column for skills */
-        padding: 0;
-    }
-    .skill-item {
-        width: 100%; /* Full width */
-        max-width: unset;
-    }
-    .experience-sub-title {
-        font-size: 1.5rem;
+        font-size: 2.2rem; /* Smaller title */
         margin-bottom: 1.5rem;
     }
 
-    /* Projects section adjustments */
-    #projects .about-containers {
-        flex-direction: column; /* Stack projects vertically */
-        align-items: center;
-        gap: 2rem;
-    }
-    .details-container.color-container {
-        width: 90%; /* Take up more width */
-        max-width: 350px; /* Keep max width */
-        margin: 0 auto;
+    .section__text__p2 {
+        font-size: 1.2rem;
     }
 
-    /* Contact section adjustments */
-    #contact {
-        height: auto; /* Adjust height for content */
-        padding-bottom: 4vh;
+    .btn-container {
+        flex-direction: column; /* Stack buttons vertically on mobile */
+        gap: 0.8rem; /* Smaller gap between stacked buttons */
+        width: 100%; /* Make buttons take full width */
     }
-    .contact-info-upper-container {
-        flex-direction: column;
+
+    .btn {
+        width: 80%; /* Ensure buttons are not too wide but still centered */
+        margin: 0 auto;
+        padding: 0.7rem 1.5rem;
+    }
+    
+    #socials-container {
+        margin-top: 1.5rem;
+        gap: 1rem;
+    }
+
+    /* About Section - Mobile View Adjustments */
+    #about {
+        padding-top: 2rem;
+    }
+
+    .section-container {
+        flex-direction: column; /* Stack details vertically */
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .about-pic {
+        width: 200px; /* Smaller about image */
+        margin-bottom: 1rem;
+    }
+
+    .about-containers {
+        flex-direction: column; /* Stack experience/education cards vertically */
+        width: 100%; /* Ensure they take available width */
+        gap: 1.5rem;
+    }
+
+    .details-container {
+        padding: 1.5rem;
+        min-width: unset; /* Remove min-width constraint */
+        width: 90%; /* Make cards take more width on mobile */
+        margin: 0 auto; /* Center individual cards */
+    }
+
+    .text-container {
+        text-align: center; /* CENTER CONTENT IN ABOUT SECTION */
+        max-width: 90%;
+        padding: 0; /* Remove horizontal padding, allow margin auto to center */
+        margin: 1.5rem auto 0;
+    }
+
+    .text-container p {
+        margin-bottom: 1rem;
+    }
+
+    .text-container .vcet-info {
+        justify-content: center; /* Ensure VCET info is centered */
+        text-align: center; /* Redundant but good for explicit clarity */
+        margin-top: 1rem; /* Adjusted margin */
+    }
+
+    /* Skills Section - Mobile View Adjustments */
+    #experience {
+        padding-top: 2rem;
+    }
+    
+    .experience-sub-title {
+        margin-bottom: 1.5rem;
+    }
+
+    .experience-details-container .details-container {
+        width: 90%; /* Make skills container wider on mobile */
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Smaller skill items for mobile */
+        gap: 0.8rem;
+        padding: 0 0.5rem; /* Reduce padding */
+    }
+    
+    .skill-item {
         padding: 1rem;
-        width: 90%;
     }
+
+    /* Projects Section - Mobile View Adjustments */
+    #projects {
+        padding-top: 2rem;
+    }
+    
+    .about-containers { /* This class is re-used for project cards */
+        flex-direction: column; /* Stack project cards vertically */
+        gap: 1.5rem;
+    }
+
+    .details-container.color-container {
+        min-width: unset; /* Remove min-width */
+        max-width: 90%; /* Adjust max-width for mobile */
+        width: 90%; /* Make project cards take more width */
+        margin: 0 auto; /* Center project cards */
+    }
+
+    .project-img {
+        height: 180px; /* Adjust height for project images */
+    }
+
+    .project-title {
+        font-size: 1.2rem;
+        margin: 1rem 0 0.8rem;
+    }
+
+    .project-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    /* Contact Section - Mobile View Adjustments */
+    #contact {
+        height: auto; /* Allow height to adjust to content */
+        padding-top: 2rem;
+        padding-bottom: 4rem; /* Add more bottom padding */
+    }
+
+    .contact-info-upper-container {
+        flex-direction: column; /* Stack contact items vertically */
+        width: 90%; /* Adjust width for mobile */
+        padding: 1rem;
+        margin: 1.5rem auto; /* Center contact container */
+        gap: 1rem; /* Smaller gap between stacked contact info */
+    }
+
     .contact-info-container {
-        margin: 0.5rem 0;
+        flex-direction: row; /* Keep icon and text inline */
+        justify-content: center; /* Center content within each contact line */
+        gap: 0.5rem;
+        margin: 0; /* Remove individual margins */
+        text-align: center;
+    }
+
+    .contact-info-container p {
+        font-size: 1rem;
+    }
+
+    .contact-icon {
+        height: 1.8rem;
+    }
+    .email-icon {
+        height: 2rem;
     }
 
     /* Footer adjustments */
@@ -882,94 +970,38 @@ footer .nav-links a:hover {
         padding: 1rem 0;
     }
     footer .nav-links {
-        flex-direction: column; /* Stack footer links */
+        flex-direction: column; /* Stack footer links vertically */
         gap: 0.5rem;
+        text-align: center;
+        margin-bottom: 0.8rem;
+    }
+    footer .nav-links a {
+        font-size: 0.9rem;
     }
     footer p {
         font-size: 0.8rem;
     }
 
-    /* Chatbot adjustments for smaller screens */
-    #chatbot-container {
-        width: 95%; /* Even wider on mobile */
-        height: 75%; /* Taller on mobile */
-        bottom: 85px; /* Adjusted to clear mobile button */
-        right: 2.5%; /* Center it better */
-        left: 2.5%;
-    }
+    /* Chatbot container for smaller screens */
     #chatbot-container.open {
-        bottom: 85px; /* Consistent with non-open state for mobile */
+        /* Mobile opened state: Take up most of the screen but leave padding */
+        top: 50px; /* Even more space from the top */
+        right: 30px; /* Slightly more space from the right */
+        bottom: 100px; /* Even more space from the bottom (above the button) */
+        left: 30px; /* Slightly more space from the left */
+        width: calc(100vw - 60px); /* Adjust width to match new left/right padding */
+        height: calc(100vh - 150px); /* Adjust height to match new top/bottom padding */
+        transform: none; /* Ensure no conflicting transforms are applied */
     }
+
     #chatbot-toggle-button {
-        width: 60px; /* Slightly smaller on mobile, but still larger than previous */
-        height: 60px;
+        width: 80px; /* A more reasonable size for mobile, to contain scaled GIF */
+        height: 80px;
         bottom: 20px;
         right: 20px;
     }
     .chatbot-icon-gif {
-        width: 35px; /* Adjusted GIF size for mobile */
-        height: 35px;
-    }
-    #chatbot-header {
-        font-size: 1.2em;
-    }
-    #chatbot-close-button {
-        font-size: 1.4em;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    /* Further adjustments for very small screens */
-    .title {
-        font-size: 2.2rem;
-    }
-    .section__text__p2 {
-        font-size: 1.1rem;
-    }
-    .nav-links {
-        font-size: 1.3rem; /* Adjusted for smaller hamburger menu */
-    }
-    .menu-links a {
-        font-size: 1.1rem; /* Smaller font for hamburger menu links */
-    }
-    .details-container h3 {
-        font-size: 1.05rem;
-    }
-    .details-container p {
-        font-size: 0.85rem;
-    }
-    .project-title {
-        font-size: 1.2rem;
-    }
-    .btn {
-        font-size: 0.9rem;
-        padding: 0.7rem 1.5rem;
-    }
-    .contact-info-container p {
-        font-size: 1rem;
-    }
-    .contact-icon {
-        height: 2rem;
-    }
-    .email-icon {
-        height: 2.2rem;
-    }
-
-    #chatbot-container {
-        width: 98%;
-        height: 70%;
-        bottom: 80px;
-        right: 1%;
-        left: 1%;
-    }
-    #chatbot-toggle-button {
-        width: 55px;
-        height: 55px;
-        bottom: 15px;
-        right: 15px;
-    }
-    .chatbot-icon-gif {
-        width: 30px;
-        height: 30px;
+        width: 89px; /* Scale down GIF for mobile button */
+        height: 89px;
     }
 }
