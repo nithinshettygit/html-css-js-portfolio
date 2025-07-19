@@ -983,27 +983,25 @@ footer .nav-links a:hover {
     }
 
     /* Chatbot container for smaller screens */
-    @media screen and (max-width: 768px) {
-        #chatbot-container.open {
-            /* Mobile opened state: Increased space from bottom to clear input area */
-            top: 50px; 
-            right: 30px; 
-            bottom: 130px; /* INCREASED from 100px */
-            left: 30px; 
-            width: calc(100vw - 60px); 
-            height: calc(100vh - 180px); /* Adjusted height (50px top + 130px bottom) */
-            transform: none; 
-        }
+    #chatbot-container.open {
+        /* Mobile opened state: Increased space from bottom to clear input area */
+        top: 50px; 
+        right: 30px; 
+        bottom: 130px; 
+        left: 30px; 
+        width: calc(100vw - 60px); 
+        height: calc(100vh - 180px); 
+        transform: none; 
+    }
 
-        #chatbot-toggle-button {
-            width: 80px; 
-            height: 80px;
-            bottom: 20px;
-            right: 20px;
-        }
-        .chatbot-icon-gif {
-            width: 70px;
-            height: 70px;
-        }
+    #chatbot-toggle-button {
+        width: 80px; 
+        height: 80px;
+        bottom: 40px; /* <--- THIS IS THE KEY CHANGE: Increased from 20px to 40px */
+        right: 20px;
+    }
+    .chatbot-icon-gif {
+        width: 70px;
+        height: 70px;
     }
 }
