@@ -615,66 +615,47 @@ footer .nav-links a:hover {
     border: 1px solid #ccc;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    z-index: 999; /* Below the button but above other content */
+    z-index: 999;
 
-    /* Initial (closed) state: off-screen and invisible */
-    right: 30px;
-    bottom: 90px;
+    /* Initial (closed) state: off-screen to the left, but positioned for left side */
+    left: 30px; /* Position it to the left */
+    bottom: 90px; /* A default bottom for its closed state, though it will slide out */
     width: 400px; /* Default desktop width */
     height: 600px; /* Default desktop height */
-    transform: translateX(100%) scale(0.8); /* Start off-screen */
+    transform: translateX(-100%) scale(0.8); /* Starts off-screen to the left */
     opacity: 0;
     visibility: hidden;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+
+    /* IMPORTANT: These will be set by JS when open, so ensure they are auto or not defined for fixed open position */
+    top: auto; 
+    right: auto;
 }
 
 #chatbot-container.open {
-    /* Opened state: visible and on-screen with desired spacing */
-    transform: translateX(0) scale(1); /* Ensure it opens fully scaled */
+    /* When open, its position will be determined by JavaScript */
+    transform: translateX(0) scale(1);
     opacity: 1;
     visibility: visible;
 
-    /* Adjust positioning to leave more space from edges on desktop */
-    top: 40px; /* More space from the top edge */
-    right: 40px; /* More space from the right edge */
-    bottom: 110px; /* More space from the bottom (above the toggle button) */
-    left: auto; /* Calculate left automatically based on width and right */
-
-    /* Ensure responsiveness on larger screens while maintaining smaller max size */
-    width: min(320px, calc(100vw - 80px)); /* Max 320px, but 40px padding on each side */
-    height: min(480px, calc(100vh - 150px)); /* Max 480px, but 40px top + 110px bottom */
+    /*
+     * The `top` and `left` are set by `script.js` based on viewport and desired margins.
+     * These `width` and `height` properties ensure appropriate sizing with symmetrical margins.
+     * Desktop: 40px top, 40px bottom margin.
+     * Mobile: 70px top, 70px bottom margin.
+     */
+    width: min(320px, calc(100vw - 80px)); /* Desktop width: max 320px, otherwise 40px padding each side */
+    height: min(480px, calc(100vh - 80px)); /* Desktop height: max 480px, otherwise 40px top + 40px bottom */
+    
+    /* Ensure no unwanted CSS transitions on top/left when JS moves it */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
 }
 
-#chatbot-toggle-button {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 140px; /* Increased to accommodate 130px GIF + 5px padding on each side */
-    height: 140px; /* Increased */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-#chatbot-toggle-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
-
-/* Style the GIF inside the button - MADE ROUND */
-.chatbot-icon-gif {
-    width: 130px; /* User-requested size */
-    height: 130px; /* User-requested size */
-    object-fit: contain; /* Ensures the GIF scales within its bounds without cropping */
-    border-radius: 50%; /* Make the GIF itself appear round */
+/* Add dragging styles */
+#chatbot-container.dragging {
+    cursor: grabbing; /* Cursor feedback when dragging */
+    /* Optional: Disable pointer events on iframe during drag to prevent interference */
+    /* #chatbot-iframe { pointer-events: none; } */
 }
 
 #chatbot-header {
@@ -688,12 +669,13 @@ footer .nav-links a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: grab; /* Indicate the header is a draggable area */
 }
 
 #chatbot-close-button {
     background: none;
     border: none;
-    color: white;
+    color: white; /* Changed back to white for consistency */
     font-size: 1.6em;
     cursor: pointer;
     padding: 0 5px;
@@ -712,6 +694,41 @@ footer .nav-links a:hover {
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
 }
+
+#chatbot-toggle-button {
+    position: fixed;
+    /* Removed bottom and right */
+    left: 30px; /* Position on the left side */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for true vertical centering */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 140px; /* Increased to accommodate 130px GIF + 5px padding on each side */
+    height: 140px; /* Increased */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+#chatbot-toggle-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-50%) scale(1.05); /* Apply scale while maintaining vertical center */
+}
+
+/* Style the GIF inside the button - MADE ROUND */
+.chatbot-icon-gif {
+    width: 130px; /* Adjusted to fit within 140px button with some padding */
+    height: 130px; /* Adjusted */
+    object-fit: contain; /* Ensures the GIF scales within its bounds without cropping */
+    border-radius: 50%; /* Make the GIF itself appear round */
+}
+
 
 /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
 
@@ -982,26 +999,26 @@ footer .nav-links a:hover {
         font-size: 0.8rem;
     }
 
-    /* Chatbot container for smaller screens and better centering */
+    /* Chatbot container for smaller screens */
     #chatbot-container.open {
-        /* Mobile opened state: Increased space from top & bottom for smaller, more centered appearance */
-        top: 70px;    /* Increased from 50px */
-        right: 30px; 
-        bottom: 150px; /* Increased from 130px */
-        left: 30px; 
-        width: calc(100vw - 60px); 
-        height: calc(100vh - 220px); /* Adjusted height based on new top (70px) + new bottom (150px) = 220px */
-        transform: none; 
+        /* Mobile opened state: Center with margins */
+        width: calc(100vw - 60px); /* 30px padding on each side */
+        height: calc(100vh - 140px); /* 70px top + 70px bottom margin */
     }
 
     #chatbot-toggle-button {
-        width: 80px; 
+        left: 20px; /* Mobile left position */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust for true vertical centering */
+        width: 80px; /* A more reasonable size for mobile, to contain scaled GIF */
         height: 80px;
-        bottom: 50px; /* Increased from 40px to push it higher */
-        right: 20px;
     }
+    #chatbot-toggle-button:hover {
+        transform: translateY(-50%) scale(1.05); /* Apply scale while maintaining vertical center */
+    }
+
     .chatbot-icon-gif {
-        width: 70px;
+        width: 70px; /* Scale down GIF for mobile button */
         height: 70px;
     }
 }
