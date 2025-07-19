@@ -982,22 +982,22 @@ footer .nav-links a:hover {
         font-size: 0.8rem;
     }
 
-    /* Chatbot container for smaller screens */
+    /* Chatbot container for smaller screens and better centering */
     #chatbot-container.open {
-        /* Mobile opened state: Increased space from bottom to clear input area */
-        top: 50px; 
+        /* Mobile opened state: Increased space from top & bottom for smaller, more centered appearance */
+        top: 70px;    /* Increased from 50px */
         right: 30px; 
-        bottom: 130px; 
+        bottom: 150px; /* Increased from 130px */
         left: 30px; 
         width: calc(100vw - 60px); 
-        height: calc(100vh - 180px); 
+        height: calc(100vh - 220px); /* Adjusted height based on new top (70px) + new bottom (150px) = 220px */
         transform: none; 
     }
 
     #chatbot-toggle-button {
         width: 80px; 
         height: 80px;
-        bottom: 40px; /* <--- THIS IS THE KEY CHANGE: Increased from 20px to 40px */
+        bottom: 50px; /* Increased from 40px to push it higher */
         right: 20px;
     }
     .chatbot-icon-gif {
