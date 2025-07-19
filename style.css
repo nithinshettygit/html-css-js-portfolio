@@ -1018,7 +1018,7 @@ footer .nav-links a:hover {
     }
 
     .chatbot-icon-gif {
-        width: 80px; /* Scale down GIF for mobile button */
-        height: 80px;
+        width: 100px; /* Scale down GIF for mobile button */
+        height: 100px;
     }
 }
